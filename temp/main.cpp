@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <unordered_map>
 using namespace std;
 
 // list of aisle names
@@ -18,7 +17,8 @@ enum GroceryType {
 	CANNED_FOOD,
 	PET_FOOD,
 	CLEANING_BATHROOM,		// 11
-	CART					// 12
+	CART,					// 12
+	EMPTY = -1
 };
 
 // the space that each item will take up in the cart
@@ -65,66 +65,67 @@ struct Item {
 	GroceryType location;
 };
 
+// list of grocery items available
 vector<Item> shopContents = {
-		{"NULL", ItemSize::TINY, 0.00, -1}, 
-		{"Apple", ItemSize::SMALL, 0.75, 1},
-		{"Banana", ItemSize::SMALL, 1.00, 1},
-		{"Potato", ItemSize::SMALL, 0.50, 1},
-		{"Onion", ItemSize::SMALL, 0.45, 1},
-		{"Tomato", ItemSize::SMALL, 0.50, 1},
-		{"Milk", ItemSize::LARGE, 5.55, 2},
-		{"Eggs", ItemSize::LARGE, 6.50, 2},
-		{"Ice Cream", ItemSize::LARGE, 0.50, 2},
-		{"Butter", ItemSize::SMALL, 0.45, 2},
-		{"Beef Mince", ItemSize::LARGE, 0.50, 2},
-		{"Cheese", ItemSize::MEDIUM, 7.50, 2},
-		{"Chicken", ItemSize::LARGE, 5.50, 2},
-		{"Bread", ItemSize::LARGE, 4.50, 3},
-		{"Weetbix", ItemSize::LARGE, 5.00, 3},
-		{"Apple Juice", ItemSize::LARGE, 4.00, 3},
-		{"Muesli Bar", ItemSize::TINY, 0.50, 3},
-		{"Porridge", ItemSize::LARGE, 5.50, 3},
-		{"Instant Coffee", ItemSize::MEDIUM, 15.5, 4},
-		{"Coffee Sachet", ItemSize::TINY, 0.80, 4},
-		{"Tea", ItemSize::MEDIUM, 7.00, 4},
-		{"Milo", ItemSize::LARGE, 17.5, 4},
-		{"Long Life Milk", ItemSize::MEDIUM, 2.00, 4},
-		{"Sugar", ItemSize::MEDIUM, 2.50, 4},
-		{"Shapes", ItemSize::MEDIUM, 2.00, 5},
-		{"Tim Tam", ItemSize::MEDIUM, 6.00, 5},
-		{"Smiths", ItemSize::LARGE, 4.00, 5},
-		{"Twisties", ItemSize::LARGE, 4.00, 5},
-		{"Oreos", ItemSize::SMALL, 3.00, 5},
-		{"Coke", ItemSize::LARGE, 5.00, 6},
-		{"Chocolate Block", ItemSize::SMALL, 7.00, 6},
-		{"Mars Bar", ItemSize::TINY, 1.50, 6},
-		{"Box Water", ItemSize::XL, 4.50, 6},
-		{"Allens Party Mix", ItemSize::SMALL, 4.00, 6},
-		{"Big Flour_Bag", ItemSize::XL, 15.00, 7},
-		{"Mayo", ItemSize::MEDIUM, 6.00, 7},
-		{"Breadcrumbs", ItemSize::MEDIUM, 2.30, 7},
-		{"Salt", ItemSize::MEDIUM, 2.50, 7},
-		{"Chilli Flakes", ItemSize::TINY, 3.00, 7},
-		{"Pasta", ItemSize::MEDIUM, 2.95, 8},
-		{"Rice", ItemSize::LARGE, 12.00, 8},
-		{"Instant Noodles", ItemSize::LARGE, 3.95, 8},
-		{"Taco Kit", ItemSize::LARGE, 5.00, 8},
-		{"Pasta Sauce", ItemSize::MEDIUM, 4.00, 8},
-		{"Beetroot Tin", ItemSize::MEDIUM, 3.80, 9},
-		{"Beans", ItemSize::MEDIUM, 3.00, 9},
-		{"Soup", ItemSize::MEDIUM, 4.50, 9},
-		{"Tuna", ItemSize::TINY, 2.00, 9},
-		{"Pineapple Tin", ItemSize::MEDIUM, 3.90, 9},
-		{"Cat Biscuits", ItemSize::XL, 13.90, 10},
-		{"Dog Mince", ItemSize::LARGE, 8.50, 10},
-		{"Cat Food Tin", ItemSize::MEDIUM, 2.70, 10},
-		{"Cat Litter", ItemSize::XL, 18.00, 10},
-		{"Schmackos", ItemSize::LARGE, 17.00, 10},
-		{"Tissues", ItemSize::LARGE, 3.00, 11},
-		{"Toilet Paper", ItemSize::XL, 7.00, 11},
-		{"Laundry Detergent", ItemSize::XL, 20.00, 11},
-		{"Dishwashing Liquid", ItemSize::LARGE, 7.50, 11},
-		{"Windex", ItemSize::MEDIUM, 4.00, 11},
+		{"NULL", ItemSize::TINY, 0.00, GroceryType::EMPTY },
+		{"Apple", ItemSize::SMALL, 0.75, GroceryType::FRUIT_VEG},
+		{"Banana", ItemSize::SMALL, 1.00, GroceryType::FRUIT_VEG},
+		{"Potato", ItemSize::SMALL, 0.50, GroceryType::FRUIT_VEG},
+		{"Onion", ItemSize::SMALL, 0.45, GroceryType::FRUIT_VEG},
+		{"Tomato", ItemSize::SMALL, 0.50, GroceryType::FRUIT_VEG},
+		{"Milk", ItemSize::LARGE, 5.55, GroceryType::FRIDGE_FREEZER},
+		{"Eggs", ItemSize::LARGE, 6.50, GroceryType::FRIDGE_FREEZER},
+		{"Ice Cream", ItemSize::LARGE, 0.50, GroceryType::FRIDGE_FREEZER},
+		{"Butter", ItemSize::SMALL, 0.45, GroceryType::FRIDGE_FREEZER},
+		{"Beef Mince", ItemSize::LARGE, 0.50, GroceryType::FRIDGE_FREEZER},
+		{"Cheese", ItemSize::MEDIUM, 7.50, GroceryType::FRIDGE_FREEZER},
+		{"Chicken", ItemSize::LARGE, 5.50, GroceryType::FRIDGE_FREEZER},
+		{"Bread", ItemSize::LARGE, 4.50, GroceryType::BAKERY_BREAKFAST},
+		{"Weetbix", ItemSize::LARGE, 5.00, GroceryType::BAKERY_BREAKFAST},
+		{"Apple Juice", ItemSize::LARGE, 4.00, GroceryType::BAKERY_BREAKFAST},
+		{"Muesli Bar", ItemSize::TINY, 0.50, GroceryType::BAKERY_BREAKFAST},
+		{"Porridge", ItemSize::LARGE, 5.50, GroceryType::BAKERY_BREAKFAST},
+		{"Instant Coffee", ItemSize::MEDIUM, 15.5, GroceryType::TEA_COFFEE},
+		{"Coffee Sachet", ItemSize::TINY, 0.80, GroceryType::TEA_COFFEE},
+		{"Tea", ItemSize::MEDIUM, 7.00, GroceryType::TEA_COFFEE},
+		{"Milo", ItemSize::LARGE, 17.5, GroceryType::TEA_COFFEE},
+		{"Long Life Milk", ItemSize::MEDIUM, 2.00, GroceryType::TEA_COFFEE},
+		{"Sugar", ItemSize::MEDIUM, 2.50, GroceryType::TEA_COFFEE},
+		{"Shapes", ItemSize::MEDIUM, 2.00, GroceryType::BISCUITS_CHIPS},
+		{"Tim Tam", ItemSize::MEDIUM, 6.00, GroceryType::BISCUITS_CHIPS},
+		{"Smiths", ItemSize::LARGE, 4.00, GroceryType::BISCUITS_CHIPS},
+		{"Twisties", ItemSize::LARGE, 4.00, GroceryType::BISCUITS_CHIPS},
+		{"Oreos", ItemSize::SMALL, 3.00, GroceryType::BISCUITS_CHIPS},
+		{"Coke", ItemSize::LARGE, 5.00, GroceryType::DRINKS_CONFECTIONARY},
+		{"Chocolate Block", ItemSize::SMALL, 7.00, GroceryType::DRINKS_CONFECTIONARY},
+		{"Mars Bar", ItemSize::TINY, 1.50, GroceryType::DRINKS_CONFECTIONARY},
+		{"Box Water", ItemSize::XL, 4.50, GroceryType::DRINKS_CONFECTIONARY},
+		{"Allens Party Mix", ItemSize::SMALL, 4.00, GroceryType::DRINKS_CONFECTIONARY},
+		{"Big Flour_Bag", ItemSize::XL, 15.00, GroceryType::BAKING_SAUCES_SPICES},
+		{"Mayo", ItemSize::MEDIUM, 6.00, GroceryType::BAKING_SAUCES_SPICES},
+		{"Breadcrumbs", ItemSize::MEDIUM, 2.30, GroceryType::BAKING_SAUCES_SPICES},
+		{"Salt", ItemSize::MEDIUM, 2.50, GroceryType::BAKING_SAUCES_SPICES},
+		{"Chilli Flakes", ItemSize::TINY, 3.00, GroceryType::BAKING_SAUCES_SPICES},
+		{"Pasta", ItemSize::MEDIUM, 2.95, GroceryType::PASTA_RICE_NOODLES},
+		{"Rice", ItemSize::LARGE, 12.00, GroceryType::PASTA_RICE_NOODLES},
+		{"Instant Noodles", ItemSize::LARGE, 3.95, GroceryType::PASTA_RICE_NOODLES},
+		{"Taco Kit", ItemSize::LARGE, 5.00, GroceryType::PASTA_RICE_NOODLES},
+		{"Pasta Sauce", ItemSize::MEDIUM, 4.00, GroceryType::PASTA_RICE_NOODLES},
+		{"Beetroot Tin", ItemSize::MEDIUM, 3.80, GroceryType::CANNED_FOOD},
+		{"Beans", ItemSize::MEDIUM, 3.00, GroceryType::CANNED_FOOD},
+		{"Soup", ItemSize::MEDIUM, 4.50, GroceryType::CANNED_FOOD},
+		{"Tuna", ItemSize::TINY, 2.00, GroceryType::CANNED_FOOD},
+		{"Pineapple Tin", ItemSize::MEDIUM, 3.90, GroceryType::CANNED_FOOD},
+		{"Cat Biscuits", ItemSize::XL, 13.90, GroceryType::PET_FOOD},
+		{"Dog Mince", ItemSize::LARGE, 8.50, GroceryType::PET_FOOD},
+		{"Cat Food Tin", ItemSize::MEDIUM, 2.70, GroceryType::PET_FOOD},
+		{"Cat Litter", ItemSize::XL, 18.00, GroceryType::PET_FOOD},
+		{"Schmackos", ItemSize::LARGE, 17.00, GroceryType::PET_FOOD},
+		{"Tissues", ItemSize::LARGE, 3.00, GroceryType::CLEANING_BATHROOM},
+		{"Toilet Paper", ItemSize::XL, 7.00, GroceryType::CLEANING_BATHROOM},
+		{"Laundry Detergent", ItemSize::XL, 20.00, GroceryType::CLEANING_BATHROOM},
+		{"Dishwashing Liquid", ItemSize::LARGE, 7.50, GroceryType::CLEANING_BATHROOM},
+		{"Windex", ItemSize::MEDIUM, 4.00, GroceryType::CLEANING_BATHROOM}
 };
 
 struct Cart {
@@ -134,7 +135,9 @@ struct Cart {
 	int storage;
 	bool paidFor = false;
 
+	// runs when 1-11 is entered in main, shows items in aisle and allows to add to cart
 	void EnterAisle(int aisle){
+		// fetch the items in the aisle
 		vector<Item> aisleContents;
 		for (Item each : shopContents) {
 			if (each.location == aisle)
@@ -142,37 +145,45 @@ struct Cart {
 		}
 
 		Input input;
-		Item itemChosen = shopContents[0];
+		Item itemChosen;
 		bool leave = false;
 
+		cin.ignore(); // so that getline doesn't take \n as input
+		// main loop
 		while (!leave) {
+			itemChosen = shopContents[0]; // initialise/reset to dummy
+			// prints available items
 			cout << "\n-- Items in aisle " << aisle;
 			for (Item each : aisleContents) cout << " - " << each.name;
+			// prompts user to view an item or leave the aisle
 			cout << "\n-- View which item? (enter exact item name or enter exit)" << endl;
 			getline(cin, input.choice);
 
-			if (input.EqualsExit()) break;
+			if (input.EqualsExit()) break; // leave the aisle
+			// matches input to the item name (case sensitive)
 			for (Item each : aisleContents) {
 				if (each.name == input.choice)
 					itemChosen = each;
 			}
-			if (itemChosen.location != -1)
+			if (itemChosen.location != -1) // skips if dummy
 				InspectItem(itemChosen);
-			itemChosen = shopContents[0];
 		}
-
-		return;
 	}
 
+	// what happens if you pick up an item and look at it
 	void InspectItem(Item item){
 		Input input;
+		// show info and prompt if they wanna add it to cart
 		cout << "\n|| " << item.name << ": Size - " << item.size << ", Price - $" << item.price;
 		cout << "\n-- Add to cart?" << endl;
 		getline(cin, input.choice);
 
+		// if they say yes
 		if (input.EqualsYes())
+			// if theres enough room
 			if (item.size <= (storage))
 				AddToCart(item);
+			// not enough room
 			else {
 				cout << "\n-- Not enough space in cart. View cart?" << endl;
 				cin >> input.choice;
@@ -181,6 +192,7 @@ struct Cart {
 			}
 	}
 
+	// add to cart and recalculate total cost and space left in cart
 	void AddToCart(Item item){
 		items.push_back(item);
 		storage -= item.size;
@@ -188,10 +200,12 @@ struct Cart {
 		cout << "-- " << item.name << " added to cart" << endl;
 	}
 
+	// remove item from cart
 	bool RemoveFromCart(string itemName){
 		Item chosenItem;
 		bool matchFound = false;
 		int index = 0;
+		// check if user input matches an item in the cart
 		for (Item each : items) {
 			if (each.name == itemName) {
 				chosenItem = each;
@@ -201,6 +215,7 @@ struct Cart {
 			index++;
 		}
 
+		// if theres a match do the inverse of adding to cart
 		if (matchFound) {
 			cout << "-- " << items[index].name << " removed from cart" << endl;
 			totalPrice -= items[index].price;
@@ -211,61 +226,83 @@ struct Cart {
 		else return false;
 	}
 
+	// print out the cart, stacking identical items and showing as #x-Item
 	void PrintCart() {
-		unordered_map<Item, int> quantities;
+		bool added;
+		vector<pair<Item, int>> quantities; 
+		// if cart is empty has different placeholder
+		if (items.size() < 1)
+			quantities = { {{"NO ITEMS IN CART"}, 0} };
+		// adds the first item to cart as palceholder
+		else quantities = { {items[0], 0} };
 
 		cout << "\n-- CART: Space left - " << storage << "/" << type << ", Total cost - $" << totalPrice;
+
+		// loop through each item in the cart
 		for (Item each : items) {
-			for (auto i : quantities) {
-				if (i.first.name == each.name) {
-					i.second += 1;
+			added = false;
+			// compare it against the running list that has the quantities of each
+			for (int i = 0; i < quantities.size(); i++)
+				if (quantities[i].first.name == each.name) {
+					quantities[i].second += 1;
+					added = true;
+					break;
 				}
-				else quantities.insert(each.name, 1);
-			}
+			if (!added)
+				quantities.push_back({ each, 1 }); // add it to the list if its not already there
 		}
 
+		// loop through the list and print
 		for (auto i : quantities) {
 			if (i.second > 1)
-				cout << "\n|| " << i.second << "X " << i.first.name << ": Size - " << i.first.size << ", Price - $" << i.first.price;
+				cout << "\n|| " << i.second << "x-" << i.first.name << ": Size - " << i.first.size << ", Price - $" << i.first.price;
+			// if theres only 1 of an item
 			else
 				cout << "\n|| " << i.first.name << ": Size - " << i.first.size << ", Price - $" << i.first.price;
 		}
 	}
 
+	// enter cart mode
 	void ViewCart(){
 		Input input;
 		bool exit = false;
 
 		PrintCart();
 		
+		// ask if user wants to remove an item
 		cout << "\n-- Remove an item?" << endl;
+		cin.ignore();
 		getline(cin, input.choice);
-		if (!input.EqualsYes())
+		if (!input.EqualsYes()) // leave cart if answer is no
 			return;
 
+		// item removing loop
+		cout << "\n-- Remove which item? (enter exact item name or enter exit)" << endl;
 		while (!exit) {
-			cout << "\n-- Remove which item? (enter exact item name or enter exit)" << endl;
-			cin >> input.choice;
+			getline(cin, input.choice);
 			if (input.EqualsExit())
 				break;
 			exit = RemoveFromCart(input.choice);
 		}
 	}
-
+	
+	// end shopping, prompts user to remove items from cart if they don't have enough $
 	void Checkout(float& money){
 		Input input;
 		bool exit;
 
+		// shows cart and total
 		PrintCart();
 		cout << "\n-- For your " << items.size() << " items, the total is $" << totalPrice << ", you have $" << money << endl;
+		// if user is broke
 		while (money < totalPrice) {
 			cout << "\n-- You don't have enough money, remove which item? (enter exact item name)" << endl;
-			getline(cin, input.choice);
+			// loop until an item's exact name is entered
+			do {
+				getline(cin, input.choice);
+			} while (!RemoveFromCart(input.choice)); // doubles as the removing function and the looping condition
 
-			exit = false;
-			while (!exit)
-				exit = RemoveFromCart(input.choice);
-
+			// show cart and total after changes
 			PrintCart();
 			cout << "\n-- For your " << items.size() << " items, the total is $" << totalPrice << ", you have $" << money << endl;
 		}
@@ -274,10 +311,12 @@ struct Cart {
 	}
 };
 
+// deals with going to aisles, cart, and checkout from the main state
 struct MainMenuInput {
 	int cartChoice;
 	unsigned int locationChoice;
 
+	// sets the cart type
 	void SetCart(Cart& cart) {
 		switch (cartChoice) {
 		case 1: cart.type = CartType::NONE; break;
@@ -287,6 +326,7 @@ struct MainMenuInput {
 		}
 	}
 
+	// runs function for chosen location
 	void GoToLocation(Cart& cart, float& money) {
 		switch (locationChoice) {
 		case 0: cart.Checkout(money); break;
@@ -297,29 +337,35 @@ struct MainMenuInput {
 };
 
 int main() {
+	// intro
 	cout << "------------------------" << endl;
 	cout << "----- Customer Sim -----" << endl;
 	cout << "------------------------" << endl;
-	Cart cart;
+	// initialise variables
 	MainMenuInput input;
+	Cart cart;
 	float money;
 
+	// set money
 	cout << "-- How much money u got? ($)" << endl;
 	cin >> money;
 
+	// choose cart
 	cout << "\n-- Which cart would you like to use? (1 = none, 2 = basket, 3 = small trolley, 4 = large trolley)" << endl;
 	cin >> input.cartChoice;
 	input.SetCart(cart);
 	cart.storage = cart.type;
 
+	// main loop, stops once the cart is paid for
 	do {
 		cout << "\n-- Where to next? (Checkout = 0, Aisles = 1-11, View Cart = 12)" << endl;
 		cin >> input.locationChoice;
-		if (input.locationChoice > 12) continue;
+		if (input.locationChoice > 12) continue; // tries again if input is invalid
 		input.GoToLocation(cart, money);
 	} while (cart.paidFor == false);
 
+	// outro message
 	cout << "-- Shopping finished with " << cart.items.size() << " items, $" << money << " remaining" << endl;
 	
-	cout << "\n---------------CODE FINSIHED--------------" << endl;
+	cout << "\n---------------END OF SIMULATION--------------" << endl;
 }

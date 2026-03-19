@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Supermarket Task", "temp\te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "City simulation", "City simulation\City simulation.vcxproj", "{005ED16B-23CC-4A65-84E7-6ABA6EE490F2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Loops exercises", "Loops exercises\Loops exercises.vcxproj", "{20713532-F075-4DCC-81EB-3FAE6B1CD349}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{005ED16B-23CC-4A65-84E7-6ABA6EE490F2}.Release|x64.Build.0 = Release|x64
 		{005ED16B-23CC-4A65-84E7-6ABA6EE490F2}.Release|x86.ActiveCfg = Release|Win32
 		{005ED16B-23CC-4A65-84E7-6ABA6EE490F2}.Release|x86.Build.0 = Release|Win32
+		{20713532-F075-4DCC-81EB-3FAE6B1CD349}.Debug|x64.ActiveCfg = Debug|x64
+		{20713532-F075-4DCC-81EB-3FAE6B1CD349}.Debug|x64.Build.0 = Debug|x64
+		{20713532-F075-4DCC-81EB-3FAE6B1CD349}.Debug|x86.ActiveCfg = Debug|Win32
+		{20713532-F075-4DCC-81EB-3FAE6B1CD349}.Debug|x86.Build.0 = Debug|Win32
+		{20713532-F075-4DCC-81EB-3FAE6B1CD349}.Release|x64.ActiveCfg = Release|x64
+		{20713532-F075-4DCC-81EB-3FAE6B1CD349}.Release|x64.Build.0 = Release|x64
+		{20713532-F075-4DCC-81EB-3FAE6B1CD349}.Release|x86.ActiveCfg = Release|Win32
+		{20713532-F075-4DCC-81EB-3FAE6B1CD349}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
